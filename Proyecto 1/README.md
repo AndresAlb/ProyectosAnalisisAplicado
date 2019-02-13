@@ -62,4 +62,3 @@ Método de búsqueda de línea con búsqueda de línea híbrida.
 | Easom      | (5,5)         | Máximo descenso |
 | McCormick  | (-0.5,-1.5)   | Ambas           |
 | Perm       | (1,0.5)       | Ambas           |
-|------------|-------------- | ----------------|
