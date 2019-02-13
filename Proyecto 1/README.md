@@ -1,3 +1,5 @@
+# Proyecto 1
+
 El objetivo es hacer búsqueda de línea híbrida con backtracking e interpolación cuadrática para evitar pasos largos y cortos.
 
 Supongamos que 
@@ -9,6 +11,8 @@ entonces calcuamos dos vectores:
 <a href="https://www.codecogs.com/eqnedit.php?latex=t_{back}&space;=&space;\frac{t}{2}&space;\text{,&space;backtracking}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?t_{back}&space;=&space;\frac{t}{2}&space;\text{,&space;backtracking}" title="t_{back} = \frac{t}{2} \text{, backtracking}" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=t_{inter}&space;=&space;\frac{g'(0))}{2(g(1)-g(0)-g'(0))}&space;\text{,&space;interpolacion&space;cuadrática}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?t_{inter}&space;=&space;\frac{g'(0))}{2(g(1)-g(0)-g'(0))}&space;\text{,&space;interpolacion&space;cuadrática}" title="t_{inter} = \frac{g'(0))}{2(g(1)-g(0)-g'(0))} \text{, interpolacion cuadrática}" /></a>
+
+## Estructura del código
 
 Escogemos uno de los valores conforme a los criterios:
 
@@ -44,7 +48,7 @@ Método de búsqueda de línea con búsqueda de línea híbrida.
 
 % debe usar la factorización de Cholesky.
 
-Funciones de prueba
+## Funciones de prueba
 
 | Función    | Punto inicial | Dirección       |
 | ---------- | ------------- | ----------------|
