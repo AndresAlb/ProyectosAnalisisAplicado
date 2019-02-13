@@ -12,7 +12,7 @@ entonces calcuamos dos vectores:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=t_{inter}&space;=&space;\frac{g'(0))}{2(g(1)-g(0)-g'(0))}&space;\text{,&space;interpolacion&space;cuadrática}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?t_{inter}&space;=&space;\frac{g'(0))}{2(g(1)-g(0)-g'(0))}&space;\text{,&space;interpolacion&space;cuadrática}" title="t_{inter} = \frac{g'(0))}{2(g(1)-g(0)-g'(0))} \text{, interpolacion cuadrática}" /></a>
 
-## Estructura del código
+## Condiciones de selección
 
 Escogemos uno de los valores conforme a los criterios:
 
@@ -25,6 +25,8 @@ Escogemos uno de los valores conforme a los criterios:
 4 El número de pasos de búsqueda sobre p no es mayor a 20
 
 5 Si se exceden los 20 pasos o se cumple el paso 3, considerar t como 0.01
+
+## Estructura del código
 
 Se debe programar el método de búsqueda de línea con las siguientes consideraciones:
 
