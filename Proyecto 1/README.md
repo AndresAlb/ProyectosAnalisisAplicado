@@ -25,14 +25,23 @@ Escogemos uno de los valores conforme a los criterios:
 Se debe programar el método de búsqueda de línea con las siguientes consideraciones:
 
 function [x, iter] = metodoblhibrido(fname, x0)
+
 Método de búsqueda de línea con búsqueda de línea híbrida.
+
 % Tolerancia para la norma del gradiente de f(x) es 1.e − 08.
+
 % Número máximo de iteraciones externas maxiter = 250
+
 % valor para la primer condición de Wolfe c1 = 1.e − 04.
+
 % La dirección de descenso es
+
 % (a) máximo descenso
+
 % (b) dirección de Newton.
+
 % Se resuelve sistemas lineales con matrices simétricas definidas positivas,
+
 % debe usar la factorización de Cholesky.
 
 Funciones de prueba
