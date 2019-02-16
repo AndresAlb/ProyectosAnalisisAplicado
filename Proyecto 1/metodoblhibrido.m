@@ -86,28 +86,8 @@ while ( ng > tol && iter < maxiter &&  norm(p)> 1.e-04)
    if (jter >= 20 || norm(alfa*p) < 1e-3)
     alfa = 1e-2;
    end
-   
-    % Fin de búsqueda de línea
-    %----------------------------------------------------------------------
-    
-     %--------------------------------------------------------------
-     % Graficación
-       t = linspace(0,1,50)';
-       ft = zeros(50,1); rt = zeros(50,1);
-       for k = 1:50        
-          ft(k) = feval(fname, x+t(k)*p);  % función 
-          rt(k) = fx + t(k)*(c1*p'*g);
-       end
-       fx = feval(fname,x+alfa*p);
-       plot(t,ft,'--b',t,rt,'--m',alfa,fx,'dr', 'LineWidth',3)
-       title('Gráfica de búsqueda de línea','Fontsize',16)
-       xlabel('EJE  T','Fontsize',16)
-       ylabel(' f(x + tp)','Fontsize',16  )
-       legend('f(x)','recta','punto')
-        pause
-      % Fin de graficación
-      %-----------------------------------------------------  
-      % Actualización de valores
+
+     % Actualización de valores
      x = x + alfa*p;  
      fx = feval(fname,x); 
      g = gradiente(fname,x);
