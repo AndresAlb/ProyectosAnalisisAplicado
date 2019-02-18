@@ -1,37 +1,37 @@
-function [x,iter] = metodoblhibrido(fname,x)
-% Método de búsqueda de línea con la primer condición de Wolfe
-% usando máximo descenso.
+function [x, iter] = metodoblhibrido(fname, x)
+% Método hibrido de búsqueda de línea con la primer condición de Wolfe
 % 13 de febrero de 2019.
 % ITAM
 % Análisis Aplicado
 % Mauricio Trejo y Andrés Albores
 %
-%In
-% fname.- cadena de caracteres con el nombre de la función a minimizar.
-% x.- vector n-dimensional.
+% In
+%   fname.- cadena de caracteres con el nombre de la función a minimizar.
+%   x.- vector n-dimensional.
 % Out
-% x.- vector n-dimensional con la aproximación al mínimo local.
-% iter.- contador con el número final de iteraciones externas.
+%   x.- vector n-dimensional con la aproximación al mínimo local.
+%   iter.- contador con el número final de iteraciones externas.
 %
 % Se requiere aproximaciones al gradiente en la función
-%  gradiente.m con el llamado:
-% g = gradiente (fname,x);
-%------------------------------------------------------------------------
+% gradiente.m con el llamado:
+%   g = gradiente (fname,x);
+
+%% Declaraciones
 
 % Parámetros
-tol     = 1.e-08;   % Tolerancia para la norma del gradiente.
-c1      = 1e-04;    % Valor para la condición de Wolfe
-maxiter = 250;      % Número máximo de iteraciones externas permitidas
-maxjter = 20;       % Número máximo de iteraciones internas de BL permitidas
+tol     = 1.e-08; % Tolerancia para la norma del gradiente.
+c1      = 1e-04;  % Valor para la condición de Wolfe
+maxiter = 250;    % Número máximo de iteraciones externas permitidas
+maxjter = 20;     % Número máximo de iteraciones internas de BL permitidas
 
 % Valores iniciales
-iter = 0;        % Contador para las iteraciones externas
+iter = 0;           % Contador para las iteraciones externas
 fx = feval(fname,x);
-g     = gradiente(fname,x);
-ng    = norm(g);
+g = gradiente(fname,x);
+ng = norm(g);
 p = 1;
 
-    % Parte iterativa
+    %% Parte iterativa
     while ( ng > tol && iter < maxiter &&  norm(p)> 1.e-04)
 
         %p = -g;                % Máximo descenso
@@ -47,8 +47,8 @@ p = 1;
         jter = 0;               % Iteraciones internas
 
         if ( abs(s) < 1.e-06)
-            disp('No existe suficiente descenso  ')
-            disp(sprintf('%2.0f  %2.10f',iter, s   ))
+            fprintf('\nNo existe suficiente descenso\n')
+            fprintf('Numero de iteraciones: %2.0f\nDerivada direccional: %2.10f\n', iter, s)
             iter = maxiter; 
         end
 
@@ -88,21 +88,21 @@ p = 1;
             alfa = 1e-2;
         end
         
-        %% Graficación
-        t = linspace(0,1,50)';
-        ft = zeros(50,1); rt = zeros(50,1);
-        for k = 1:50        
-        ft(k) = feval(fname, x+t(k)*p);  % función 
-        rt(k) = fx + t(k)*(c1*p'*g);
-        end
-        fx = feval(fname,x+alfa*p);
-        plot(t,ft,'--b',t,rt,'--m',alfa,fx,'dr', 'LineWidth',3)
-        title('Gráfica de búsqueda de línea','Fontsize',16)
-        xlabel('EJE  T','Fontsize',16)
-        ylabel(' f(x + tp)','Fontsize',16  )
-        legend('f(x)','recta','punto')
-        pause
-
+%         %% Graficación
+%         t = linspace(0,1,50)';
+%         ft = zeros(50,1); rt = zeros(50,1);
+%         for k = 1:50        
+%             ft(k) = feval(fname, x+t(k)*p);  % función 
+%             rt(k) = fx + t(k)*(c1*p'*g);
+%         end
+%         fx = feval(fname,x+alfa*p);
+%         plot(t,ft,'--b',t,rt,'--m',alfa,fx,'dr', 'LineWidth',3)
+%         title('Gráfica de búsqueda de línea','Fontsize',16)
+%         xlabel('EJE  T','Fontsize',16)
+%         ylabel(' f(x + tp)','Fontsize',16  )
+%         legend('f(x)','recta','punto')
+%         pause
+        
         %% Actualización de valores
         x = x + alfa*p;  
         fx = feval(fname,x); 
