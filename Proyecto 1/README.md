@@ -60,5 +60,6 @@ Método de búsqueda de línea con búsqueda de línea híbrida.
 | Ackley     | (0,1.5)       | Máximo descenso |
 | Branin     | (-4,13)       | Newton          |
 | Easom      | (5,5)         | Máximo descenso |
-| McCormick  | (-0.5,-1.5)   | Ambas           |
-| Perm       | (1,0.5)       | Ambas           |
+| McCormick  | (x,y)         | Ambas           |
+| Perm       | (x,y)         | Ambas           |
+| Bohachevsky| (x,y)         | Ambas           |
