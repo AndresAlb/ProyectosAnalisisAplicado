@@ -1,30 +1,26 @@
 function [x, iter] = metodoblhibrido(fname, x)
-% M茅todo hibrido de b煤squeda de l铆nea con la primer condici贸n de Wolfe
+% M閠odo h韇rido de b鷖queda de l韓ea con la primer condici髇 de Wolfe
 % 13 de febrero de 2019.
 % ITAM
-% An谩lisis Aplicado
-% Mauricio Trejo y Andr茅s Albores
+% An醠isis Aplicado
+% Mauricio Trejo, Andr閟 Albores y Aar髇 L髉ez
 %
 % In
-%   fname.- cadena de caracteres con el nombre de la funci贸n a minimizar.
+%   fname.- cadena de caracteres con el nombre de la funci髇 a minimizar.
 %   x.- vector n-dimensional.
 % Out
-%   x.- vector n-dimensional con la aproximaci贸n al m铆nimo local.
-%   iter.- contador con el n煤mero final de iteraciones externas.
+%   x.- vector n-dimensional con la aproximaci髇 al m韓imo local.
+%   iter.- contador con el n鷐ero final de iteraciones externas.
 %
-% Se requiere aproximaciones al gradiente en la funci贸n
+% Se requiere aproximaciones al gradiente en la funci髇
 % gradiente.m con el llamado:
 %   g = gradiente (fname,x);
 
-%% Declaraciones
-
-% Par谩metros
 tol = 1.e-08;  % Tolerancia para la norma del gradiente.
-c1 = 1e-04;    % Valor para la condici贸n de Wolfe
-maxiter = 250; % N煤mero m谩ximo de iteraciones externas permitidas
-maxjter = 20;  % N煤mero m谩ximo de iteraciones internas de BL permitidas
+c1 = 1e-04;    % Valor para la condici髇 de Wolfe
+maxiter = 250; % N鷐ero m醲imo de iteraciones externas permitidas
+maxjter = 20;  % N鷐ero m醲imo de iteraciones internas de BL permitidas
 
-% Valores iniciales
 iter = 0;               % Contador para las iteraciones externas
 g = gradiente(fname, x);
 ng = norm(g);
@@ -33,15 +29,16 @@ p = 1;
     %% Parte iterativa
     while ( ng > tol && iter < maxiter &&  norm(p)> 1e-04)
 
-        %p = -g;                % M谩ximo descenso
+        %p = -g;                % M醲imo descenso
         H = hessiana(fname, x);
-        p = -H\g;               % Direcci贸n de Newton
+        p = -H\g;               % Direcci髇 de Newton
+        
         alfa = 1;               % Paso completo
         alfa2 = 1;              % Paso completo
         xt = x + alfa*p;        % Primer punto de prueba
-        f  = feval(fname, x);   % Valor de la funci贸n
-        f1 = feval(fname, xt);  % Valor de la funci贸n en el punto de prueba
-        f2 = f1;                % Valor de la funci贸n en el punto de prueba
+        f  = feval(fname, x);   % Valor de la funci髇
+        f1 = feval(fname, xt);  % Valor de la funci髇 en el punto de prueba
+        f2 = f1;                % Valor de la funci髇 en el punto de prueba
         s  = p'*g;              % Derivada direccional
         jter = 0;               % Iteraciones internas
 
@@ -52,30 +49,30 @@ p = 1;
             iter = maxiter; 
         end
 
-        %% B煤squeda de l铆nea
+        %% B鷖queda de l韓ea
         while(f1 > f + alfa*c1*s && f2 > f + alfa2*c1*s && jter < maxjter)
 
             % Backtracking
             alfa = alfa/2;
 
-            % Interpolaci贸n cuadr谩tica
+            % Interpolaci髇 cuadr醫ica
             d2 = f2 - f - s;
             alfa2 = -s/(2*d2);
 
-            % Selecci贸n de alfa
+            % Selecci髇 de alfa
             if(f1 <= f + alfa*c1*s)
                 if(f2 <= f + alfa2*c1*s)
-                    % Backtracking e interpolaci贸n cuadr谩tica cumplen Wolfe 1
+                    % Backtracking e interpolaci髇 cuadr醫ica cumplen Wolfe 1
                     alfa = max(alfa, alfa2);
                 end
             else
-                % S贸lo interpolaci贸n cuadr谩tica cumple Wolfe1
+                % S髄o interpolaci髇 cuadr醫ica cumple Wolfe 1
                 if(f2 <= f + alfa2*c1*s)
                     alfa = alfa2;
                 end
             end
 
-            % Actualizaci贸n
+            % Actualizaci髇
             xt = x + alfa*p;
             f1 = feval(fname, xt);
             xt = x + alfa2*p;
@@ -88,7 +85,7 @@ p = 1;
             alfa = 1e-2;
         end
         
-        %% Actualizaci贸n de valores
+        %% Actualizaci髇 de valores
         x = x + alfa*p;  
         f = feval(fname, x); 
         g = gradiente(fname, x);
@@ -100,7 +97,7 @@ p = 1;
     alfa = 1e-2;
    end
 
-     % Actualizaci贸n de valores
+     % Actualizaci髇 de valores
      x = x + alfa*p;  
      fx = feval(fname,x); 
      g = gradiente(fname,x);
