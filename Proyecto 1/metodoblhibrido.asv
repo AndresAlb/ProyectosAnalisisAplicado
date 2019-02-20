@@ -105,8 +105,8 @@ p = 1;
         
         %% Actualización de valores
         x = x + alfa*p;  
-        f = feval(fname, x); 
-        g = gradiente(fname, x);
+        fx = feval(fname,x); 
+        g = gradiente(fname,x);
         iter = iter + 1;
 
     end
