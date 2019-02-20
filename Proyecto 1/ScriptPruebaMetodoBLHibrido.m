@@ -17,7 +17,7 @@ disp(pOptimo');
 %% Funcion Rastrigin
 
 fprintf('\nRASTRIGIN:\n')
-puntoIni = [0.3; 0.2];
+puntoIni = [0.4; 0.3];
 pOptimo = [0; 0];
 [x, iter] = metodoblhibrido('rastrigin', puntoIni);
 fprintf('\n\nPunto optimo aproximado:\n\n');
@@ -29,7 +29,7 @@ disp(pOptimo');
 %% Funcion Griewank
 
 fprintf('\nGRIEWANK:\n')
-puntoIni = [1.4; 0];
+puntoIni = [2; 0];
 pOptimo = [0; 0];
 [x, iter] = metodoblhibrido('griewank', puntoIni);
 fprintf('\n\nPunto optimo aproximado:\n\n');
@@ -41,7 +41,7 @@ disp(pOptimo');
 %% Funcion Ackley
 
 fprintf('\nACKLEY:\n')
-puntoIni = [-0.1; 0.1];
+puntoIni = [0; 1.5];
 pOptimo = [0; 0];
 [x, iter] = metodoblhibrido('ackley', puntoIni);
 fprintf('\n\nPunto optimo aproximado:\n\n');
