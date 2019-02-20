@@ -80,30 +80,17 @@ p = 1;
             jter = jter + 1;
 
         end
-
-        if (jter >= 20 || norm(alfa*p) < 1e-3)
-            alfa = 1e-2;
-        end
-        
-        %% Actualización de valores
-        x = x + alfa*p;  
-        f = feval(fname, x); 
+    
+    if (jter >= 20 || norm(alfa*p) < 1e-3)
+        alfa = 1e-2;
+    end
+    
+    % Actualización de valores
+        x = x + alfa*p;
         g = gradiente(fname, x);
         iter = iter + 1;
 
     end
-    
-   if (jter >= 20 || norm(alfa*p) < 1e-3)
-    alfa = 1e-2;
-   end
-
-     % Actualización de valores
-     x = x + alfa*p;  
-     fx = feval(fname,x); 
-     g = gradiente(fname,x);
-     iter = iter + 1;
-end
-
 end
 
 
