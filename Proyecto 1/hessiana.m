@@ -2,12 +2,11 @@ function [H] = hessiana(fname,x)
 % Aproximacion de la hessiana 
 % de una funcion  de R^n a R.
 
-%In
-% fname .- cadena con el nombre de la funcion.
-% x .- vector columna de dimension n.
+% In
+%   fname .- cadena con el nombre de la funcion.
+%   x .- vector columna de dimension n.
 % Out
-% H - es la aproximación a la matriz hessiana en x.
-%------------------------------------------------------
+%   H - es la aproximación a la matriz hessiana en x.
 
 h = 1.e-06;
 n = length(x);
@@ -24,5 +23,6 @@ for i=1:n
         H(j,i) = H(i,j);
     end
 end
+
 end
 

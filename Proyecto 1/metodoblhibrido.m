@@ -1,7 +1,7 @@
 function [x, iter] = metodoblhibrido(fname, x, dirNewton)
 
 % Método híbrido de búsqueda de línea con la primer condición de Wolfe
-% 13 de febrero de 2019.
+% 20 de febrero de 2019.
 % ITAM
 % Análisis Aplicado
 % Mauricio Trejo, Andrés Albores y Aarón López
@@ -9,7 +9,7 @@ function [x, iter] = metodoblhibrido(fname, x, dirNewton)
 % In
 %   fname.- cadena de caracteres con el nombre de la función a minimizar
 %   x.- vector n-dimensional
-%   dirNewton.- valor logico que dice si se utiliza la direccion de Newton
+%   dirNewton.- variable binaria que dice si se utiliza la direccion de Newton
 %   o la direccion de Maximo Descenso
 % Out
 %   x.- vector n-dimensional con la aproximación al mínimo local.

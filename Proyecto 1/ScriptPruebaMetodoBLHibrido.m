@@ -8,8 +8,8 @@ fprintf('\nROSENBROCK:\n')
 puntoIni = [2; 2];
 pOptimo = [1; 1];
 [x, iterBH] = metodoblhibrido('rosenbrock', puntoIni, true);
-[~, iterBIC] = busquedaLineaInterpolacion('rosenbrock', puntoIni, true);
-[~, iterBS] = busquedaLineaSimple('rosenbrock', puntoIni, true);
+[~, iterBIC] = metodoblinterpolacion('rosenbrock', puntoIni, true);
+[~, iterBS] = metodoblsimple('rosenbrock', puntoIni, true);
 fprintf('\n\nPunto optimo aproximado:\n\n');
 disp(x');
 fprintf('Numero de iteraciones con backtracking hibrido: %d\n', iterBH);
