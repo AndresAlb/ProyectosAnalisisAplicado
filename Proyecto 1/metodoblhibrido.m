@@ -1,4 +1,5 @@
-function [x, iter] = metodoblhibrido(fname, x)
+function [x, iter] = metodoblhibrido(fname, x, dirNewton)
+
 % Método híbrido de búsqueda de línea con la primer condición de Wolfe
 % 13 de febrero de 2019.
 % ITAM
@@ -6,8 +7,10 @@ function [x, iter] = metodoblhibrido(fname, x)
 % Mauricio Trejo, Andrés Albores y Aarón López
 %
 % In
-%   fname.- cadena de caracteres con el nombre de la función a minimizar.
-%   x.- vector n-dimensional.
+%   fname.- cadena de caracteres con el nombre de la función a minimizar
+%   x.- vector n-dimensional
+%   dirNewton.- valor logico que dice si se utiliza la direccion de Newton
+%   o la direccion de Maximo Descenso
 % Out
 %   x.- vector n-dimensional con la aproximación al mínimo local.
 %   iter.- contador con el número final de iteraciones externas.
@@ -27,11 +30,16 @@ ng = norm(g);
 p = 1;
 
     %% Parte iterativa
-    while ( ng > tol && iter < maxiter &&  norm(p)> 1e-04)
-
-        %p = -g;                % Máximo descenso
-        H = hessiana(fname, x);
-        p = -H\g;               % Dirección de Newton
+    while ( ng > tol && iter < maxiter &&  norm(p) > 1e-04)
+        
+        if(dirNewton == true)
+            H = hessiana(fname, x);
+            U = chol(H); % Fact. Cholesky: H = U'*U, U triang. superior
+            U = U\eye(2, 2); % Invertimos U con fact. LU
+            p = -(U*U')*g; % Calculamos la dir. de Newton con Cholesky
+        else
+            p = -g; % Direccion de maximo descenso
+        end
         
         alfa = 1;               % Paso completo
         alfa2 = 1;              % Paso completo
@@ -44,20 +52,20 @@ p = 1;
 
         if( abs(s) < 1.e-06 )
             fprintf('\nNo hay suficiente descenso\n')
-            fprintf('Numero de iteraciones: %2.0f', iter)
-            fprintf('\nDerivada direccional: %2.10f\n', s)
-            iter = maxiter; 
+            %fprintf('Numero de iteraciones: %2.0f', iter)
+            %fprintf('\nDerivada direccional: %2.10f\n', s)
+            return;
         end
 
         %% Búsqueda de línea
         while(f1 > f + alfa*c1*s && f2 > f + alfa2*c1*s && jter < maxjter)
 
-            % Backtracking
+            % Backtracking simple
             alfa = alfa/2;
 
             % Interpolación cuadrática
             d2 = f2 - f - s;
-            alfa2 = -s/(2*d2);
+            alfa2 = s/(2*d2);
 
             % Selección de alfa
             if(f1 <= f + alfa*c1*s)
