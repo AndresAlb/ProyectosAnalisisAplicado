@@ -34,9 +34,14 @@ p = 1;
         
         if(dirNewton == true)
             H = hessiana(fname, x);
-            U = chol(H); % Fact. Cholesky: H = U'*U, U triang. superior
-            U = U\eye(2, 2); % Invertimos U con fact. LU
-            p = -(U*U')*g; % Calculamos la dir. de Newton con Cholesky
+            [U, spd] = chol(H); % Fact. Cholesky: H = U'*U, U triang. superior
+            if(spd == 0)
+                U = U\eye(2, 2); % Invertimos U con fact. LU
+                p = -(U*U')*g; % Calculamos la dir. de Newton con Cholesky
+            else
+                % H no es s.p.d. en ese punto
+                p = -H\g;
+            end
         else
             p = -g; % Direccion de maximo descenso
         end
@@ -89,11 +94,11 @@ p = 1;
 
         end
     
-    if (jter >= 20 || norm(alfa*p) < 1e-3)
+    if(jter >= 20 || norm(alfa*p) < 1e-3)
         alfa = 1e-2;
     end
     
-    % Actualización de valores
+        % Actualización de valores
         x = x + alfa*p;
         g = gradiente(fname, x);
         iter = iter + 1;
